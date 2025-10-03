@@ -20,9 +20,14 @@ def fetch_poster(movie_id):
         st.error(f"Error fetching poster: {e}")
     # Return a placeholder if the poster is not found or an error occurs
     return "https://placehold.co/500x750/333/FFFFFF?text=No+Poster"
-
+# Load globally once
+model = pickle.load(open("similarity.pkl", "rb"))
 
 def recommend(movie):
+    def recommend(movie):
+        model = pickle.load(open("similarity.pkl", "rb"))  # BAD
+    ...
+
     """Recommends 5 similar movies based on the selected movie."""
     try:
         index = movies[movies['title'] == movie].index[0]
